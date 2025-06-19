@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #D2D2D2;
+            background-image:
+                repeating-linear-gradient(to right, transparent 0 100px,
+                    #25283b22 100px 101px),
+                repeating-linear-gradient(to bottom, transparent 0 100px,
+                    #25283b22 100px 101px);
+        }
+
+        body::before {
+            position: absolute;
+            width: min(1400px, 90vw);
+            top: 10%;
+            left: 50%;
+            height: 90%;
+            transform: translateX(-50%);
+            content: '';
+            background-image: url(images/bg.png);
+            background-size: 100%;
+            background-repeat: no-repeat;
+            background-position: top center;
+            pointer-events: none;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="banner">
+        <div class="slider" style="--quantity: 10">
+            <div class="item" style="--position: 1"><img src="images2/dragon_1.jpg" alt=""></div>
+            <div class="item" style="--position: 2"><img src="images2/dragon_2.jpg" alt=""></div>
+            <div class="item" style="--position: 3"><img src="images2/dragon_3.jpg" alt=""></div>
+            <div class="item" style="--position: 4"><img src="images2/dragon_4.jpg" alt=""></div>
+            <div class="item" style="--position: 5"><img src="images2/dragon_5.jpg" alt=""></div>
+            <div class="item" style="--position: 6"><img src="images2/dragon_6.jpg" alt=""></div>
+            <div class="item" style="--position: 7"><img src="images2/dragon_7.jpg" alt=""></div>
+            <div class="item" style="--position: 8"><img src="images2/dragon_8.jpg" alt=""></div>
+            <div class="item" style="--position: 9"><img src="images2/dragon_9.jpg" alt=""></div>
+            <div class="item" style="--position: 10"><img src="images2/dragon_10.jpg" alt=""></div>
+        </div>
+        <div class="content">
+            <h1 data-content="CSS ONLY">
+                CSS ONLY
+            </h1>
+            <div class="author">
+                <h2>SHABAN</h2>
+                <p><b>Web Design</b></p>
+                <p>
+                    An Amazing Web Design With Css
+                </p>
+            </div>
+            <div class="model"></div>
+        </div>
+    </div>
+
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+
+    <script>
+        const coords = { x: 0, y: 0 };
+        const circles = document.querySelectorAll(".circle");
+
+        const colors = [
+            "#25283B",  // Dark blue
+            "#2E3245",
+            "#373B4F",
+            "#404559",
+            "#4A4F63",
+            "#53596D",
+            "#5A63B5",  // Purple-blue
+            "#4E56A0",
+            "#434A8B",
+            "#373D76",
+            "#2C3161",
+            "#25283B",  // Dark blue (repeat)
+            "#3A3F6B",  // Medium blue
+            "#4F55A5",
+            "#5A63B5",  // Purple-blue
+            "#4B5298",
+            "#3C427B",
+            "#2D325E",
+            "#25283B",  // Dark blue
+            "#1E2130"   // Darker blue
+        ];
+
+        circles.forEach(function (circle, index) {
+            circle.x = 0;
+            circle.y = 0;
+            circle.style.backgroundColor = colors[index % colors.length];
+        });
+
+        window.addEventListener("mousemove", function (e) {
+            coords.x = e.clientX;
+            coords.y = e.clientY;
+        });
+
+        function animateCircles() {
+            let x = coords.x;
+            let y = coords.y;
+
+            circles.forEach(function (circle, index) {
+                circle.style.left = x - 12 + "px";
+                circle.style.top = y - 12 + "px";
+
+                circle.style.transform = `scale(${(circles.length - index) / circles.length})`;
+
+                circle.x = x;
+                circle.y = y;
+
+                const nextCircle = circles[index + 1] || circles[0];
+                x += (nextCircle.x - x) * 0.3;
+                y += (nextCircle.y - y) * 0.3;
+            });
+
+            requestAnimationFrame(animateCircles);
+        }
+
+        animateCircles();
+    </script>
+
+</body>
+
+</html>
